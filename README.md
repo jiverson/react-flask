@@ -1,25 +1,41 @@
 # react-flask
 
-### App startup  
-```
+### App build  
+```bash
 python3 -m venv venv
 . venv/bin/activate
 pip install -r requirements.txt
 
 export FLASK_APP=app
-export FLASK_ENV=development
+export FLASK_ENV=development 
 flask run
 
 # shutdown
 deactivate
 ```
 
-### Client startup  
-```
-cd client
-npm install
-npm run start
+### App startup  
+```bash
+. venv/bin/activate
+FLASK_APP=app FLASK_ENV=development flask run
 ```
 
-http://localhost:3000
+### App shutdown
+```bash
+deactivate
+```
+
+### Client startup  
+```bash
+cd client
+npm install
+npm start
+```
+
+To view open: http://localhost:3000
+
+### Notes
+
+## Flask
+* [ENV Docs](http://flask.pocoo.org/docs/1.0/cli/)
 
