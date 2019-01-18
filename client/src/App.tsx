@@ -7,18 +7,17 @@ import Divider from '@material-ui/core/Divider'
 import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
 import ListItemText from '@material-ui/core/ListItemText'
-import Tooltip from '@material-ui/core/Tooltip';
-import IconButton from '@material-ui/core/IconButton';
-import DeleteIcon from '@material-ui/icons/Delete';
+import Tooltip from '@material-ui/core/Tooltip'
+import IconButton from '@material-ui/core/IconButton'
+import DeleteIcon from '@material-ui/icons/Delete'
 import queryString from 'query-string'
 import { Theme } from '@material-ui/core/styles/createMuiTheme'
 import createStyles from '@material-ui/core/styles/createStyles'
 import withStyles, { WithStyles } from '@material-ui/core/styles/withStyles'
 import withRoot from './withRoot'
 import JobLevel from './components/JobLevel'
-import JobCategory from './components/JobCategory'
-import JobLocation from './components/JobLocation'
 import { Suggestion } from './components/AutoSuggestProps'
+import JobSearch from './components/JobSearch'
 
 interface State {
   value: string
@@ -28,8 +27,8 @@ interface State {
   category: string | null
   location: string | null
   level: string | null
-  loading: boolean,
-  firstRun: boolean,
+  loading: boolean
+  firstRun: boolean
 }
 
 interface Props extends WithStyles<typeof styles> {}
@@ -76,8 +75,7 @@ const styles = (theme: Theme) =>
       alignItems: 'center',
       justifyContent: 'center',
     },
-    progress: {
-    },
+    progress: {},
     deleteIcon: {
       position: 'absolute',
       top: theme.spacing.unit,
@@ -210,8 +208,18 @@ class App extends React.Component<Props, State> {
       <div className={classes.root}>
         <Paper className={classes.paper}>
           <JobLevel onSelection={this.handleLevelChange} />
-          <JobCategory industries={industries} onSelection={this.handleCategoryChange} />
-          <JobLocation locations={locations} onSelection={this.handleLocationChange} />
+          <JobSearch
+            label={'In the field of'}
+            placeholder={'Category'}
+            allSuggestions={industries}
+            onSelection={this.handleCategoryChange}
+          />
+          <JobSearch
+            label={'Near'}
+            placeholder={'Location'}
+            allSuggestions={locations}
+            onSelection={this.handleLocationChange}
+          />
           <Button onClick={this.getJobs} variant="contained" size="large" color="primary" disabled={loading}>
             Search
           </Button>
